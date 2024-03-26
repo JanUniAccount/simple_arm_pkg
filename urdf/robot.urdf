@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="simple_robot">
+
+<!-- Here we define the model parameters  -->
+
+<!-- Geometry  -->
+
+<xacro:property name="base_link_length" value="0.05"/>
+<xacro:property name="base_link_radius" value="0.2"/>
+
+	<link name="base_link">
+		<visual>
+			<geometry>
+				<cylinder length="0.05" 
+				radius="0.2"/>
+			</geometry>
+			
+			<!--origin - the reference frame of the visual element with respect to the reference frame of the link -->
+			<!-- rpy - r is roll, p-pitch and y -yaw -->
+			<!-- xyz - x,y,z -offsets  -->
+			<origin rpy="0 0 0" xyz="0 0 0"/>
+			<material name="blue" >
+				<color rgba = "0 0 1 1"/>
+			</material>
+			
+			
+		</visual>
+	
+	</link>
+	
+	<joint name="joint_1" type="revolute">
+		<parent link="base_link"/>
+		<child link="first_link"/>
+			<origin xyz="0 0 0.025"/>
+			<axis xyz="0 0 1"/>
+			<limit effort="300" 
+			 velocity="2.0" 
+			 lower="-1.2" 
+			 upper="1.2" />
+	</joint>	
+
+	<link name="first_link">
+	<visual>
+		<geometry>
+			<box size="0.1 0.1 0.5" />
+		</geometry>	
+		<origin rpy="0 0 0" xyz="0 0 0.25" />
+		<material name="red">
+			<color rgba = "1 0 0 1"/>
+		</material>
+	</visual>
+	</link>
+
+	<joint name="joint_2" type="revolute">
+		<parent link="first_link"/>
+		<child link="second_link"/>
+			<origin xyz="0 0 0.5"/>
+			<axis xyz="1 0 0"/>
+			<limit effort="300" 
+			velocity="2.0" 
+			lower="-5" 
+			upper="5" />
+	</joint>
+
+	<link name="second_link">
+	<visual>
+		<geometry>
+			<box size="0.1 1 0.1" />
+		</geometry>	
+		<origin rpy="0 0 0" xyz="0 0.5 0.05" />
+		<material name="green">
+			<color rgba = "0 1 0 1"/>
+		</material>
+	</visual>
+	</link>
+
+	<joint name="joint_3" type="revolute">
+		<parent link="second_link"/>
+		<child link="third_link"/>
+			<origin xyz="0 1 0.05"/>
+			<axis xyz="1 0 0"/>
+			<limit effort="300" 
+			velocity="2.0" 
+			lower="-5" 
+			upper="5" />
+	</joint>
+
+	<link name="third_link">
+	<visual>
+		<geometry>
+			<box size="0.1 0.5 0.1" />
+		</geometry>	
+		<origin rpy="0 0 0" xyz="0 0.25 0.0" />
+		<material name="green">
+			<color rgba = "0 1 0 1"/>
+		</material>
+	</visual>
+	</link>
+
+	<joint name="joint_4" type="revolute">
+		<parent link="third_link"/>
+		<child link="fourth_link"/>
+			<origin xyz="0.05 0.5 0"/>
+			<axis xyz="0 0 1"/>
+			<limit effort="300" 
+			velocity="2.0" 
+			lower="-0.6" 
+			upper="0.18" />
+	</joint>
+
+	<link name="fourth_link">
+	<visual>
+		<geometry>
+			<box size="0.05 0.2 0.05" />
+		</geometry>	
+		<origin rpy="0 0 0" xyz="0 0.1 0" />
+		<material name="yellow" >
+				<color rgba = "1 1 0 1"/>
+		</material>
+	</visual>
+	</link>
+
+	<joint name="joint_5" type="revolute">
+		<parent link="third_link"/>
+		<child link="fifth_link"/>
+			<origin xyz="-0.05 0.5 0"/>
+			<axis xyz="0 0 1"/>
+			<limit effort="300" 
+			velocity="2.0" 
+			lower="-0.6" 
+			upper="0.2" />
+			<mimic joint="joint_4" multiplier = "-1.0" />
+	</joint>
+
+	<link name="fifth_link">
+	<visual>
+		<geometry>
+			<box size="0.05 0.2 0.05" />
+		</geometry>	
+		<origin rpy="0 0 0" xyz="0 0.1 0" />
+		<material name="yellow" >
+				<color rgba = "1 1 0 1"/>
+		</material>
+	</visual>
+	</link>
+	
+</robot>
