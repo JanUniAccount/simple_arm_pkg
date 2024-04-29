@@ -58,8 +58,8 @@
 			<axis xyz="1 0 0"/>
 			<limit effort="300" 
 			velocity="2.0" 
-			lower="-5" 
-			upper="5" />
+			lower="-0.5" 
+			upper="0.5" />
 	</joint>
 
 	<link name="second_link">
@@ -81,8 +81,8 @@
 			<axis xyz="1 0 0"/>
 			<limit effort="300" 
 			velocity="2.0" 
-			lower="-5" 
-			upper="5" />
+			lower="-0.5" 
+			upper="0.5" />
 	</joint>
 
 	<link name="third_link">
@@ -97,39 +97,39 @@
 	</visual>
 	</link>
 
-	<joint name="joint_4" type="revolute">
-		<parent link="third_link"/>
-		<child link="fourth_link"/>
-			<origin xyz="0.05 0.5 0"/>
+
+<joint name="joint_4" type="revolute">
+    <parent link="third_link"/>
+    <child link="fourth_link"/>
+    <origin xyz="0.0 0.5 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="300" 
+	velocity="2.0" 
+	lower="-0.9" 
+	upper="0.9" />
+</joint>
+
+<link name="fourth_link">
+    <visual>
+        <geometry>
+            <box size="0.1 0.1 0.1" /> 
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0.05 0" /> 
+        <material name="orange">
+            <color rgba="1 0.5 0 1"/>
+        </material>
+    </visual>
+    </link>
+
+	<joint name="joint_5" type="revolute">
+		<parent link="fourth_link"/>
+		<child link="fifth_link"/>
+			<origin xyz="0.05 0.05 0"/>
 			<axis xyz="0 0 1"/>
 			<limit effort="300" 
 			velocity="2.0" 
 			lower="-0.6" 
 			upper="0.18" />
-	</joint>
-
-	<link name="fourth_link">
-	<visual>
-		<geometry>
-			<box size="0.05 0.2 0.05" />
-		</geometry>	
-		<origin rpy="0 0 0" xyz="0 0.1 0" />
-		<material name="yellow" >
-				<color rgba = "1 1 0 1"/>
-		</material>
-	</visual>
-	</link>
-
-	<joint name="joint_5" type="revolute">
-		<parent link="third_link"/>
-		<child link="fifth_link"/>
-			<origin xyz="-0.05 0.5 0"/>
-			<axis xyz="0 0 1"/>
-			<limit effort="300" 
-			velocity="2.0" 
-			lower="-0.6" 
-			upper="0.2" />
-			<mimic joint="joint_4" multiplier = "-1.0" />
 	</joint>
 
 	<link name="fifth_link">
@@ -143,5 +143,31 @@
 		</material>
 	</visual>
 	</link>
+
+	<joint name="joint_6" type="revolute">
+		<parent link="fourth_link"/>
+		<child link="sixth_link"/>
+			<origin xyz="-0.05 0.05 0"/>
+			<axis xyz="0 0 1"/>
+			<limit effort="300" 
+			velocity="2.0" 
+			lower="-0.6" 
+			upper="0.2" />
+			<mimic joint="joint_5" multiplier = "-1.0" />
+	</joint>
+
+	<link name="sixth_link">
+	<visual>
+		<geometry>
+			<box size="0.05 0.2 0.05" />
+		</geometry>	
+		<origin rpy="0 0 0" xyz="0 0.1 0" />
+		<material name="yellow" >
+				<color rgba = "1 1 0 1"/>
+		</material>
+	</visual>
+	</link>
+
 	
+
 </robot>
